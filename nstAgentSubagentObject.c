@@ -99,25 +99,28 @@ void update_signal_value()
         PQclear(res);
         PQfinish(conn);
         signalValue = 0;
-        return;
     }
-
-    res = PQexec(conn,
-                 "SELECT signalValue FROM snmpSignals ORDER BY signalTime DESC LIMIT 1");
-
-    if (PQresultStatus(res) != PGRES_TUPLES_OK)
+    else
     {
-        snmp_log(LOG_ERR, "Did not get signalValue from database\n");
+        res = PQexec(conn,
+                     "SELECT signalValue FROM snmpSignals ORDER BY signalTime DESC LIMIT 1");
+
+        if (PQresultStatus(res) != PGRES_TUPLES_OK)
+        {
+            snmp_log(LOG_ERR, "Did not get signalValue from database\n");
+            PQclear(res);
+            PQfinish(conn);
+            signalValue = 0;
+            return;
+        }
+        else
+        {
+            signalValue = atoi(PQgetvalue(res, 0, 0));
+        }
+
         PQclear(res);
         PQfinish(conn);
-        signalValue = 0;
-        return;
     }
-
-    signalValue = atoi(PQgetvalue(res, 0, 0));
-
-    PQclear(res);
-    PQfinish(conn);
 }
 
 int handler_signalValue(netsnmp_mib_handler *handler, netsnmp_handler_registration *reginfo, netsnmp_agent_request_info *reqinfo, netsnmp_request_info *requests)
@@ -143,8 +146,6 @@ int handler_signalValue(netsnmp_mib_handler *handler, netsnmp_handler_registrati
 void init_db_signalValue()
 {
     update_signal_value();
-
-    printf(signalValue);
 
     static oid signalValue_oid[] = {1, 3, 6, 1, 4, 1, 53864, 2, 4, 1, 1, 2, 1};
 

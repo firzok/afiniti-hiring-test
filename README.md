@@ -13,7 +13,7 @@ Based on the little understanding I got from the Net-SNMP Library I made an SNMP
 Based on the little time I had I was only able to run the Subagent as a root user.
 
 #### Inferior Solutions
-One solution I came up with was to use Python and [Pysnmp Library](http://snmplabs.com/pysnmp/). This would have taken less effort and time to develop but a Python program can never be compared to a C/C++ program in terms of its performance and the ability to scale.
+One solution I came up with was to use `Python` and [Pysnmp Library](http://snmplabs.com/pysnmp/). This would have taken less effort and time to develop but a Python program can never be compared to a C/C++ program in terms of its performance and the ability to scale.
 
 #### Dependencies
 * net-snmp

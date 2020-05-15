@@ -1,0 +1,22 @@
+﻿As part of the Oversight Guild at Afiniti, you have been asked to set up an SNMP agent along with custom enterprise OIDs on a Linux server to be monitored.
+
+
+You need to use the enterprise number 53864 for Afiniti, and set up an SNMP agent that exposes three custom OIDs of your creation:
+1- The first OID should return a string denoting the version number of a software that runs on the system. You can return the static string ‘6.1.1’ for this OID
+2- The second OID should query a Postgres table named ‘snmpSignals’ in a database named ‘afinitiTest’ and return the latest value of the column ‘signalValue’ as determined by the timestamp column ‘signalTime’. Please create the table yourself, fill it up with a few rows of data, and make the table creation and INSERT script part of your solution in a file named ‘database.sql’
+3- The third OID should return the total disk space used (in bytes) for the /var/log/ folder.
+
+
+The solution design will be judged on the language choice (the response latency is very important), scalability and robustness (potential error inducing scenarios should be thought about and gracefully handled). There are many approaches that you can take for the solution, you can extend net-snmp with your custom program, add your agents to the net-snmp code directly or even pick another customizable SNMP agent and modify it to fit the requirements. We recommend C++, C shell or Golang for the solution, but you can pick an appropriate language instead.
+
+
+If you are unfamiliar with SNMP, a couple of hours of reading should fill the gap. Your solution should incorporate custom code written in a language of your choice, given the constraints. Please do not make the solution overly complicated, your work should take a day or two of effort.
+
+
+Create a ‘README.md’ file containing notes on your design, your testing methodology, the breakdown of your tasks and the time spent on each, the reason for your design and language choices, a better approach, if any, that you did not take due to the time constraint and any other solutions that were possible but you did not take as they were inferior. 
+
+
+Please upload all relevant files constituting your solution on your github account and share the link with us. The task should not take more than a day or two of R&D and development. Please get the solution to us by 15th May, 2020 if possible.
+
+
+Thank you and good luck.

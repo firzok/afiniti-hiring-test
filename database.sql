@@ -1,0 +1,19 @@
+-- DROP DATABASE IF EXISTS afinitiTest;
+
+-- CREATE DATABASE afinitiTest;
+
+DROP TABLE IF EXISTS snmpSignals;
+
+CREATE TABLE IF NOT EXISTS snmpSignals(
+ 	signalId INT PRIMARY KEY NOT NULL,
+ 	signalValue INT NOT NULL,
+ 	signalTime TIMESTAMP NOT NULL
+);
+INSERT INTO snmpSignals VALUES (1, 7, '2020-05-14 16:35:25-07');
+INSERT INTO snmpSignals VALUES (2, 6, '2020-05-15 18:30:25-07');
+INSERT INTO snmpSignals VALUES (3, 5, '2020-05-15 18:55:25-07');
+INSERT INTO snmpSignals VALUES (4, 10, '2020-05-15 19:53:25-07');
+INSERT INTO snmpSignals VALUES (5, 50, '2020-05-15 20:50:25-07');
+
+
+SELECT signalValue FROM snmpSignals ORDER BY signalTime DESC LIMIT 1;

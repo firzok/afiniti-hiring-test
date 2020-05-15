@@ -1,9 +1,9 @@
+#include <signal.h>
+#include "subagentObject.h"
 #include <net-snmp/net-snmp-config.h>
 #include <net-snmp/net-snmp-includes.h>
 #include <net-snmp/agent/net-snmp-agent-includes.h>
-#include <signal.h>
 
-#include <nstAgentSubagentObject.h>
 static int keep_running;
 
 RETSIGTYPE stop_server(int a)
@@ -39,12 +39,9 @@ int main(int argc, char **argv)
     SOCK_STARTUP;
 
     // initialize the agent library
-    init_agent("example-daemon");
+    init_agent("my-daemon");
 
     // initialize mib code here
-
-    // mib code: init_nstAgentSubagentObject from nstAgentSubagentObject.C
-    // init_nstAgentSubagentObject();
 
     init_version();
     init_log_size();
@@ -57,8 +54,8 @@ int main(int argc, char **argv)
         init_usmUser();
     }
 
-    // example-daemon will be used to read example-daemon.conf files.
-    init_snmp("example-daemon");
+    // my-daemon will be used to read my-daemon.conf files.
+    init_snmp("my-daemon");
 
     // If we're going to be a snmp master agent, initial the ports
     if (!agentx_subagent)
@@ -69,7 +66,7 @@ int main(int argc, char **argv)
     signal(SIGTERM, stop_server);
     signal(SIGINT, stop_server);
 
-    snmp_log(LOG_INFO, "example-daemon is up and running.\n");
+    snmp_log(LOG_INFO, "Daemon is up and running.\n");
 
     // your main loop here...
     while (keep_running)
@@ -80,7 +77,7 @@ int main(int argc, char **argv)
     }
 
     // at shutdown time
-    snmp_shutdown("example-daemon");
+    snmp_shutdown("my-daemon");
     SOCK_CLEANUP;
 
     return 0;

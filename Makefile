@@ -13,26 +13,15 @@ CC=gcc -Wimplicit-function-declaration
 # -Wno-implicit-function-declaration
 # -Wl,--no-undefined
 
-OBJS1=snmpdemoapp.o
-OBJS2=example-daemon.o nstAgentSubagentObject.o
-OBJS3=asyncapp.o
-TARGETS=example-daemon snmpdemoapp asyncapp
+OBJS=daemon.o subagentObject.o
+TARGETS=daemon
 
-CFLAGS=-I. `net-snmp-config --cflags`
-BUILDLIBS=`net-snmp-config --libs`
 BUILDAGENTLIBS=`net-snmp-config --agent-libs`
 
-# shared library flags (assumes gcc)
-DLFLAGS=-fPIC -shared
+# all: $(TARGETS)
 
-all: $(TARGETS)
-
-example-daemon: $(OBJS2)
-	$(CC) -lpq -o example-daemon $(OBJS2) $(BUILDAGENTLIBS) -lpq
+daemon: $(OBJS)
+	$(CC) -lpq -o daemon $(OBJS) $(BUILDAGENTLIBS) -lpq
 
 clean:
-	rm -f $(OBJS1) $(OBJS2) $(OBJS3) $(TARGETS)
-
-nstAgentPluginObject.so: nstAgentPluginObject.c Makefile
-	$(CC) $(CFLAGS) $(DLFLAGS) -c -o nstAgentPluginObject.o nstAgentPluginObject.c
-	$(CC) $(CFLAGS) $(DLFLAGS) -o nstAgentPluginObject.so nstAgentPluginObject.o
+	rm -f $(OBJS) $(TARGETS)

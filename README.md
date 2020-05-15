@@ -21,19 +21,21 @@ One solution I came up with was to use Python and [Pysnmp Library](http://snmpla
 
 #### Running
 
-1. Run this command in the project folder to clean previous build(if any)
+1. Run the [database.sql](https://github.com/firzok/afiniti-hiring-test/blob/master/database.sql) file in your pgAdmin to setup the database.
+
+2. Run this command in the project folder to clean previous build(if any)
 
     ```console
     foo@bar:~$ make clean
     ```
 
-2. Run this command in the project folder to build
+3. Run this command in the project folder to build
 
     ```console
     foo@bar:~$ make
     ```
 
-3. Run this command to run
+4. Run this command to run
 
     ```console
     foo@bar:~$ sudo ./daemon -f
